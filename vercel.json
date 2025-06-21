@@ -1,0 +1,30 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    }
+  ],
+  "builds": [
+    {
+      "src": "apps/frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": { "outputDirectory": "dist" }
+    },
+    {
+      "src": "apps/backend/src/index.js",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["apps/backend/**"] }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "apps/backend/src/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "apps/frontend/$1"
+    }
+  ]
+}
