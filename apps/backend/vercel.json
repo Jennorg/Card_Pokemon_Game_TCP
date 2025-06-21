@@ -16,15 +16,5 @@
       "use": "@vercel/node",
       "config": { "includeFiles": ["apps/backend/**"] }
     }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "apps/backend/src/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "apps/frontend/$1"
-    }
   ]
 }
