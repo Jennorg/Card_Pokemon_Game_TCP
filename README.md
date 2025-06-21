@@ -27,8 +27,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 ### 1. Clonar el repositorio
 
 ```bash
-git clone <URL_DE_TU_REPOSOITORIO>
-cd Card_Pokemon_Game
+git clone https://github.com/Jennorg/Card_Pokemon_Game_TCP.git
 ```
 
 ### 2. Instalar dependencias del monorepo
@@ -38,19 +37,6 @@ Desde la raíz del monorepo, instala todas las dependencias para ambos backend y
 ```bash
 npm install
 ```
-
-### 3. Configurar variables de entorno (backend)
-
-Crea un archivo `.env` en la raíz de la carpeta `apps/backend` con el siguiente contenido:
-
-```env
-API_PORT=3000
-TCP_PORT=4000
-```
-
-> Estos son los puertos que usarán los servidores API/WebSocket principal y el servidor de jugadores, respectivamente.
-
----
 
 ## 🏃 Ejecución de la Aplicación
 
@@ -84,7 +70,7 @@ Este juego simula una interacción de cartas entre jugadores. Cada instancia del
 
 ### 1. Abre dos pestañas/ventanas del navegador
 
-Abre [http://localhost:5173/](http://localhost:5173/) en dos pestañas o ventanas diferentes de tu navegador. Cada una actuará como un jugador independiente.
+Abre en dos pestañas o ventanas diferentes de tu navegador. Cada una actuará como un jugador independiente.
 
 ### 2. Identifica los IDs de Jugador
 
@@ -110,17 +96,4 @@ También se actualizará el mensaje de **"Notificación"** y **"Mensaje del Opon
 
 ---
 
-## 🔄 Flujo de Comunicación (simplificado)
-
-Cada instancia de Frontend ([http://localhost:5173/](http://localhost:5173/)) se conecta a:
-
-- **Backend principal (Puerto 3000):** Para registrar su ID de WebSocket y manejar comandos generales (como pedir info de salas).
-- **Servidor de Jugadores (Puerto 4000):** Se conecta como un "jugador" de sala. El backend asigna un `player-ID` (ej., `player-1`, `player-2`) a esta conexión.
-
-**Cuando un Frontend envía una carta:**
-
-1. El Frontend A (tu pestaña actual) envía un mensaje de `game_message` al Backend principal (Puerto 3000), especificando su propio `PlayerId` y el `targetPlayerId` (el player-ID del otro jugador conectado al puerto 4000).
-2. El Backend principal recibe esto y le dice al Servidor de Jugadores (Puerto 4000) que envíe la carta al `targetPlayerId`.
-3. El Servidor de Jugadores (Puerto 4000) encuentra la conexión WebSocket del `targetPlayerId` y le envía el JSON de la carta.
-4. El Servidor de Jugadores (Puerto 4000) también notifica a TODOS los demás jugadores en la misma sala (excepto al remitente original) a través de sus conexiones del puerto 4000 que se ha jugado una carta. Esta es la notificación que activa la animación en la pestaña del receptor.
-
+### MI PRIMER MONOREPO!!! :D
